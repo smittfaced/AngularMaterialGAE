@@ -1,0 +1,24 @@
+{
+  "name": "gae-angular-material-starter",
+  "dependencies": {
+    "font-awesome": "latest",
+    "angular": "1.5.6",
+    "angular-animate": "1.5.6",
+    "angular-mocks": "1.5.6",
+    "angular-bootstrap": "2.0.0",
+    "angular-ui-utils": "3.0.0",
+    "angular-ui-router": "1.1.0-beta.1",
+    "lodash": "4.14.1",
+    "angular-messages": "1.5.6",
+    "angular-material": "1.1.0",
+    "angular-aria": "1.5.6",
+    "angular-no-captcha": "0.6.0",
+    "lrInfiniteScroll": "1.0.1"",
+    "angulartics": "1.1.0",
+    "restangular": "1.5.2"
+  },
+  "resolutions": {
+    "lodash": "4.14.1",
+    "angular": "~1.5"
+  }
+}
