@@ -40,7 +40,7 @@ You can now sign in via Google, or you can click "Generate Database" and then si
 
 
 ##When Preparing to Deploy to AppEngine Servers 
-‘’
+```
 cd cropolis-v2
 gulp build
 appcfg.py update main
