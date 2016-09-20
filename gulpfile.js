@@ -224,7 +224,7 @@
     ]);
 
     gulp.task('build', [
-        // 'lint', error on linting py files, commented out to continue processing
+        'lint',
         'zip-lib',
         'uglify',
         'inject-scripts',
