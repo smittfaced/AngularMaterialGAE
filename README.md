@@ -1,6 +1,4 @@
-#GAE Angular Material Starter
-#####Easiest way to start Google App Engine Angular Material project on Earth & Mars!
-As a base for this I've used starter projects [gae-init] and [MEANJS], so big thanks to them!
+#Cropolis V2 - Connecting farmers and their local communities for a tastier, more sustainable world.
 
 This full stack uses following technologies:
 * Google App Engine
@@ -9,19 +7,15 @@ This full stack uses following technologies:
 * Angular Material
 * Gulp, Bower, npm
 
-######You can see live demo here: https://gae-angular-material-starter.appspot.com/
+######You can see live demo here: [app.cropolis.co][]
 
 ##What's implemented?
-* Everything about user authentication - signin, signup, forgot pass, reset pass ... and all the boring stuff is done for you :)
-* Authentication with 11 different OAuth sites (Facebook, Twitter, etc.)
-* User profile pages - users can view/edit their profiles
-* Users list
-* Admin Interface - admin can edit app config, edit/delete/block users, etc.
-* "Send Feedback" page
-* Ability to generate mock data, while developing
-* Integration with no-captcha
+* User Authentication
+* Business and User profile pages - users can view/edit their profiles
+* Admin Interface - admin can edit app config, edit/delete/block users, and have elevated access to users profiles and business for assistance in management.
+* Feedback from Users and guests
 * Tracking with Google Analytics
-* Lots of useful angular directives and services
+* Much more!
 
 ##What do I need?
 First make sure you've got following things installed on your machine:
@@ -30,49 +24,35 @@ First make sure you've got following things installed on your machine:
 * [pip][]
 * [virtualenv][]
 
-##Install!
-Using yeoman:
-```
-sudo npm install -g generator-gae-angular-material-starter
-mkdir myNewApp && cd myNewApp
-yo gae-angular-material-starter  # it will ask you few questions, e.g your app name, etc.
-gulp run
-```
-
+##Installation
 Using github:
 ```
-git clone https://github.com/madvas/gae-angular-material-starter
-cd gae-angular-material-starter
+git clone https://github.com/smittfaced/cropolis-v2.git
+cd cropolis-v2
 npm install
-gulp run
+gulp run - this might result in errors!
+in cropolis-v2/main find and extract lib.zip
+In the appengine-sdk launcher, add the project using the ‘Add Existing Project’ feature and launch the app
+The app should be available on localhost:8080, and the database will be explorable on localhost:8000
 ```
 And that's it! You should now see the app running on port 8080.
 You can now sign in via Google, or you can click "Generate Database" and then sign in as "admin" with password "123456"
 
-##Deploy!
-When you're done with your beautiful Material Design app it's time to deploy!
-First, make sure you change your application name in `app.yaml`
-```
+
+##When Preparing to Deploy to AppEngine Servers 
+‘’
+cd cropolis-v2
 gulp build
 appcfg.py update main
 ```
-And that's it! Your next big thing is out!
 
-##What's left to do?
-* Tests - soon to be done
-* Docs/Tutorial - Although, docs doesn't exist yet, code is heavily commented, so you know what's going on :)
+And that's it! Happy Developing!
 
-##Contribute!
-Sure you can :)
 
-License
---
-MIT. Can't be more open, source ;)
 
 [google app engine sdk for python]: https://developers.google.com/appengine/downloads
 [node.js]: http://nodejs.org/
 [pip]: http://www.pip-installer.org/
 [virtualenv]: http://www.virtualenv.org/
-[gae-init]: https://github.com/gae-init/gae-init
-[meanjs]: https://github.com/meanjs/mean
+[app.cropolis.co]: https://app.cropolis.co
 # Cropolis-V2
