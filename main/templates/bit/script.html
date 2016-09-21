@@ -11,6 +11,7 @@
     <script src="/p/lib/lodash/lodash.js"></script>
     <script src="/p/lib/lrInfiniteScroll/lrInfiniteScroll.js"></script>
     <script src="/p/lib/angulartics/src/angulartics.js"></script>
+    <script src="/p/lib/angulartics/src/angulartics-ga-cordova-google-analytics-plugin.js"></script>
     <script src="/p/application.js"></script>
     <script src="/p/modules/admin/admin.client.module.js"></script>
     <script src="/p/modules/core/core.client.module.js"></script>
@@ -50,5 +51,5 @@
     <script src="/p/dist/templates.js?{{ config.CURRENT_VERSION_ID }}"></script>
 # endif
 # if config.DEVELOPMENT
-    <script src="http://{{ request.host.split(':')[0] }}:35729/livereload.js"></script>
+{#    <script src="http://{{ request.host.split(':')[0] }}:35729/livereload.js"></script>#}
 # endif
