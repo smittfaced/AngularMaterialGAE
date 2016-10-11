@@ -28,7 +28,8 @@
                         _.assignDelete(gaAppConfig, appConfig);
                         $state.go('home');
                     });
-                }
+                },
+                templateUrl : '/p/modules/users/auth/signin.client.view.html',
             })
             .state('forgot', {
                 url         : '/password/forgot',
