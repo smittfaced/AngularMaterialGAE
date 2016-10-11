@@ -11,10 +11,13 @@
         $scope.cfg = gaAppConfig;
         $scope.captchaControl = {};
 
+        console.log($scope.cfg);
+        console.log(gaAppConfig);
+        
         $scope.signup = function() {
             $scope.loading = true;
             Restangular.all('auth/signup').post($scope.credentials).then(function(user) {
-                if ($scope.cfg.verify_email) {//jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+                if ($scope.cfg.verify_email) {
                     gaToast.show('Your account has been created! Please verify your email');
                     $state.go('home');
                 } else {

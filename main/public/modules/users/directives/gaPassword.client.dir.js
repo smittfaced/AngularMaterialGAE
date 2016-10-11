@@ -20,6 +20,7 @@
             scope.label = scope.label || 'Password';
             scope.lengths = gaValidators.user.password;
             scope.form = form;
+
             if (attrs.repeatPassword) {
                 scope.$watch(function() {
                     return scope.repeatPassword() === ngModel.$modelValue;

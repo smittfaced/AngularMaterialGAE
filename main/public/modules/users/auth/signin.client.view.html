@@ -4,36 +4,34 @@
             <h1 class="md-toolbar-tools">Sign in</h1>
         </md-toolbar>
 
-        <md-content class="md-padding md-whiteframe-z1">
-            <form name="signinForm">
-              <div layout="column" layout-gt-sm="row">
-                <md-input-container flex flex-order="1">
-                    <label>Email or username</label>
-                    <input ng-model="credentials.login"
-                           required
-                           tabindex="1"
-                           autofocus
-                           name="login" type="text">
+        <md-content class="md-whiteframe-z1">
+            <form name="signinForm" layout-padding>
+                <div layout="column" flex>
+                  <md-input-container flex flex-order="1">
+                      <label>Email or Username</label>
+                      <input ng-model="credentials.login"
+                             required
+                             tabindex="1"
+                             autofocus
+                             name="login" type="text">
 
-                </md-input-container>
-                <ga-password flex flex-order="2" ng-model="credentials.password"
-                             input-tabindex="2"
-                             name="password"></ga-password>
-                <!--
-                <ga-captcha flex ng-model="credentials.captcha" ng-required="true" class="mar-bot-15"
-                            control="captchaControl"></ga-captcha>
-                -->
-              </div>
-              <div class="mar-top-20" layout="column" layout-gt-sm="row" layout-margin>
-                  <md-button flex flex-order-sm="3"
+                  </md-input-container>
+                  <ga-password flex flex-order="2" ng-model="credentials.password"
+                               input-tabindex="2"
+                               name="password"></ga-password>
+                  <ga-captcha flex flex-order="3" ng-model="credentials.captcha" ng-hide="true" ng-required="true" class="mar-bot-15"
+                              control="captchaControl"></ga-captcha>
+                </div>
+              <div layout="column" layout-gt-sm="row" layout-margin>
+                  <md-button flex flex-order="3" flex-order-gt-sm="1"
                              tabindex="5"
                              ui-sref="forgot">Forgot password?
                   </md-button>
-                  <md-button flex flex-order-sm="2"
+                  <md-button flex flex-order="2" flex-order-gt-sm="2"
                              tabindex="4"
                              ui-sref="signup">Sign up
                   </md-button>
-                  <md-button flex flex-order-sm="1"
+                  <md-button flex flex-order="1" flex-order-gt-sm="3"
                              class="md-raised md-primary"
                              ng-disabled="!signinForm.$valid || isLoading"
                              type="submit"
