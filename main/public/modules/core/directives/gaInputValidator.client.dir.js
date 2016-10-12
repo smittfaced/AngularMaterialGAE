@@ -27,6 +27,7 @@
         var compile = function(el, attrs) {
             var type = attrs.gaInputValidator || attrs.name;
             var values = gaValidators[attrs.validatorCategory][type];
+
             if (_.isArray(values)) {
                 if (values[0] > 0) {
                     attrs.$set('ng-minlength', values[0]);

@@ -2,7 +2,7 @@
     'use strict';
     var module = angular.module('users');
 
-    module.controller('SignupController', function($scope, Restangular, gaAppConfig, gaToast, gaBrowserHistory,
+    module.controller('SignupController', function($scope, Restangular, gaAppConfig, gaToast, gaValidators, gaBrowserHistory,
                                                    gaAuthentication, _, gaTracking, $state) {
         if (gaAuthentication.isLogged()) {
             gaBrowserHistory.back();
@@ -10,10 +10,8 @@
 
         $scope.cfg = gaAppConfig;
         $scope.captchaControl = {};
+        $scope.validators = gaValidators;
 
-        console.log($scope.cfg);
-        console.log(gaAppConfig);
-        
         $scope.signup = function() {
             $scope.loading = true;
             Restangular.all('auth/signup').post($scope.credentials).then(function(user) {

@@ -1,56 +1,37 @@
 <div layout="row" class="w-100" layout-align="center start">
-    <div flex flex-gt-md="80" flex-gt-lg="70">
-        <md-toolbar class="md-accent">
-            <h1 class="md-toolbar-tools">Sign up</h1>
-        </md-toolbar>
+  <div flex flex-gt-md="80" flex-gt-lg="70">
+    <md-toolbar class="md-accent">
+      <h1 class="md-toolbar-tools">Sign up</h1>
+    </md-toolbar>
 
-        <md-content class="md-whiteframe-z1">
-            <form name="signupForm" layout-padding>
-              <div layout="column" flex>
-                <ga-email flex flex-order="1" ng-model="credentials.email" required input-tabindex="1"></ga-email>
-                <md-input-container flex flex-order="2">
-                    <label>Username</label>
-                    <input ng-model="credentials.username"
-                           ga-input-validator
-                           validator-category="user"
-                           tabindex="2"
-                           required
-                           name="username" type="text">
+    <md-content class="md-whiteframe-z1">
+      <form name="signupForm" layout-padding>
+        <div layout="column" flex>
+          <ga-email flex flex-order="1" ng-model="credentials.email" required input-tabindex="1"></ga-email>
+          <md-input-container flex flex-order="2">
+            <label>Username</label>
+            <input ng-model="credentials.username" ga-input-validator validator-category="user" tabindex="2" required name="username" type="text">
 
-                    <div ng-if="signupForm.username.$dirty" ng-messages="signupForm.username.$error">
-                        <div ng-message="minlength">Username needs to be at least {{ cfg.USERNAME_MINLENGTH }}
-                            characters long
-                        </div>
-                        <div ng-message="maxlength">Username can be up to {{ cfg.USERNAME_MAXLENGTH }} characters long
-                        </div>
-                        <div ng-message="required">Username is required</div>
-                    </div>
-                </md-input-container>
-                <ga-password flex flex-order="3" ng-model="credentials.password"
-                             input-tabindex="3"
-                             name="password"></ga-password>
-                <ga-password flex flex-order="4" ng-model="credentials.repeatPassword"
-                             repeat-password="credentials.password"
-                             name="repeatPassword"
-                             label="Repeat Password"
-                             input-tabindex="4"></ga-password>
-                <ga-captcha flex flex-order="5" ng-model="credentials.captcha" ng-required="true" ng-hide="true" control="captchaControl"></ga-captcha>
+            <div ng-if="signupForm.username.$dirty" ng-messages="signupForm.username.$error">
+              <div ng-message="minlength">Username needs to be at least {{ validators.user.username[0] }} characters long
               </div>
-              <div class="mar-top-20" layout="column" layout-gt-sm="row" layout-margin>
-                  <md-button flex flex-order-sm="2"
-                             ui-sref="signin">Already have an account?</md-button>
-                  <md-button class="md-raised md-primary"
-                             flex
-                             flex-order-sm="1"
-                             tabindex="5"
-                             type="submit"
-                             ng-disabled="!signupForm.$valid || isLoading"
-                             ng-click="signup()">
-                      <i class="fa fa-sign-in btn-icon"></i>Sign Up
-                  </md-button>
+              <div ng-message="maxlength">Username can be up to {{ validators.user.username[1] }} characters long
               </div>
-            </form>
-            <ga-auth-options remember="credentials.remember"></ga-auth-options>
-        </md-content>
-    </div>
+              <div ng-message="required">Username is required</div>
+            </div>
+          </md-input-container>
+          <ga-password flex flex-order="3" ng-model="credentials.password" input-tabindex="3" name="password"></ga-password>
+          <ga-password flex flex-order="4" ng-model="credentials.repeatPassword" repeat-password="credentials.password" name="repeatPassword" label="Repeat Password" input-tabindex="4"></ga-password>
+          <ga-captcha flex flex-order="5" ng-model="credentials.captcha" ng-required="true" ng-hide="true" control="captchaControl"></ga-captcha>
+        </div>
+        <div class="mar-top-20" layout="column" layout-gt-sm="row" layout-margin>
+          <md-button flex flex-order-sm="2" ui-sref="signin">Already have an account?</md-button>
+          <md-button class="md-raised md-primary" flex flex-order-sm="1" tabindex="5" type="submit" ng-disabled="!signupForm.$valid || isLoading" ng-click="signup()">
+            <i class="fa fa-sign-in btn-icon"></i>Sign Up
+          </md-button>
+        </div>
+      </form>
+      <ga-auth-options remember="credentials.remember"></ga-auth-options>
+    </md-content>
+  </div>
 </div>
