@@ -1,116 +1,135 @@
 (function() {
-    'use strict';
+  'use strict';
 
-    var module = angular.module('core');
+  var module = angular.module('core');
 
-    module.constant('_', _);
+  module.constant('_', _);
 
-    module.config(function($locationProvider, RestangularProvider, $mdThemingProvider) {
-        $locationProvider.html5Mode(false);
+  module.config(function($locationProvider, RestangularProvider, $mdThemingProvider, $mdIconProvider) {
+    $locationProvider.html5Mode(false);
 
-        RestangularProvider
-            .setBaseUrl('/api/v1')
-            .setRestangularFields({
-                id : 'key'
-            });
+    RestangularProvider
+      .setBaseUrl('/api/v1')
+      .setRestangularFields({
+        id: 'key'
+      });
 
-        $mdThemingProvider.theme('default')
-            .primaryPalette('green')
-            .accentPalette('amber');
+    $mdThemingProvider.theme('default')
+      .primaryPalette('green')
+      .accentPalette('amber');
+
+    $mdIconProvider
+      .iconSet('action', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-action.svg', 24)
+      .iconSet('alert', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-alert.svg', 24)
+      .iconSet('av', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-av.svg', 24)
+      .iconSet('communication', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-communication.svg', 24)
+      .iconSet('content', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-content.svg', 24)
+      .iconSet('device', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-device.svg', 24)
+      .iconSet('editor', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-editor.svg', 24)
+      .iconSet('file', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-file.svg', 24)
+      .iconSet('hardware', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-hardware.svg', 24)
+      .iconSet('image', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-image.svg', 24)
+      .iconSet('maps', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-maps.svg', 24)
+      .iconSet('navigation', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-navigation.svg', 24)
+      .iconSet('notification', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-notification.svg', 24)
+      .iconSet('places', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-places.svg', 24)
+      .iconSet('social', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-social.svg', 24)
+      .iconSet('toggle', '/p/lib/material-design-icons/sprites/svg-sprite/svg-sprite-toggle.svg', 24)
+      .defaultIconSet('/p/lib/material-design-icons/iconfont/MaterialIcons-Regular.svg', 24);
+  });
+
+  module.run(function(Restangular, gaToast, $state, $transitions, $rootScope, $timeout, gaFlashMessages, _,
+    gaAuthentication, gaBrowserHistory) {
+    var loadingPromise;
+    var endLoading = function() {
+      $timeout.cancel(loadingPromise);
+      $rootScope.isLoading = false;
+    };
+
+    if (gaAuthentication.isLogged()) {
+      gaAuthentication.user = Restangular.restangularizeElement(null, gaAuthentication.user, 'users');
+    }
+
+    gaBrowserHistory.init();
+
+    Restangular.setErrorInterceptor(function(res) {
+      endLoading();
+      var msg = res.data && res.data.message ? res.data.message :
+        'Sorry, I failed so badly I can\'t even describe it :(';
+      if (res.status === 403) {
+        gaToast.show('Sorry, you\'re not allowed to do it, please sign in with different account');
+        $state.go('signin');
+      } else if (res.status === 401) {
+        gaToast.show('Please sign in first!');
+        $state.go('signin');
+      } else if (res.status === 404) {
+        gaToast.show('Sorry, this requested page doesn\'t exist');
+        gaBrowserHistory.back();
+      } else {
+        gaToast.show(msg);
+      }
+      return true;
     });
 
-    module.run(function(Restangular, gaToast, $state, $transitions, $rootScope, $timeout, gaFlashMessages, _,
-                        gaAuthentication, gaBrowserHistory) {
-        var loadingPromise;
-        var endLoading = function() {
-            $timeout.cancel(loadingPromise);
-            $rootScope.isLoading = false;
-        };
+    Restangular.addRequestInterceptor(function(element, operation) {
+      // This is just convenient loading indicator, so we don't have to do it in every controller
+      // separately. It's mainly used to disable submit buttons, when request is sent. There's also
+      // added little delay so disabling buttons looks more smooth
+      loadingPromise = $timeout(function() {
+        $rootScope.isLoading = true;
+      }, 500);
 
-        if (gaAuthentication.isLogged()) {
-            gaAuthentication.user = Restangular.restangularizeElement(null, gaAuthentication.user, 'users');
-        }
-
-        gaBrowserHistory.init();
-
-        Restangular.setErrorInterceptor(function(res) {
-            endLoading();
-            var msg = res.data && res.data.message ? res.data.message :
-                'Sorry, I failed so badly I can\'t even describe it :(';
-            if (res.status === 403) {
-                gaToast.show('Sorry, you\'re not allowed to do it, please sign in with different account');
-                $state.go('signin');
-            } else if (res.status === 401) {
-                gaToast.show('Please sign in first!');
-                $state.go('signin');
-            } else if (res.status === 404) {
-                gaToast.show('Sorry, this requested page doesn\'t exist');
-                gaBrowserHistory.back();
-            } else {
-                gaToast.show(msg);
-            }
-            return true;
-        });
-
-        Restangular.addRequestInterceptor(function(element, operation) {
-            // This is just convenient loading indicator, so we don't have to do it in every controller
-            // separately. It's mainly used to disable submit buttons, when request is sent. There's also
-            // added little delay so disabling buttons looks more smooth
-            loadingPromise = $timeout(function() {
-                $rootScope.isLoading = true;
-            }, 500);
-
-            // Flask responds with error, when DELETE method contains body, so we remove it
-            if (operation === 'remove') {
-                return undefined;
-            }
-            return element;
-        });
-        Restangular.addResponseInterceptor(function(data) {
-            endLoading();
-            return data;
-        });
-
-        /**
-         * This interceptor extracts meta data from list response
-         * This meta data can be:
-         *      cursor - ndb Cursor used for pagination
-         *      totalCount - total count of items
-         *      more - whether datastore contains more items, in terms of pagination
-         */
-        Restangular.addResponseInterceptor(function(data, operation) {
-            var extractedData;
-            if (operation === 'getList') {
-                extractedData = data.list;
-                extractedData.meta = data.meta;
-            } else {
-                extractedData = data;
-            }
-            return extractedData;
-        });
-
-        /**
-         * If there are FlashMessages from server, toast will display them
-         */
-        if (!_.isEmpty(gaFlashMessages)) {
-            $timeout(function() {
-                gaToast.show(gaFlashMessages[0], {
-                    delay : 10000
-                });
-            }, 1000);
-        }
-
-        $rootScope.$on('$stateChangeError', function() {
-            gaToast.show('Sorry, there was a error while loading that page.');
-        });
-
-        /**
-         * Fires off when content was scrolled to bottom. This is defined in base.html
-         */
-        $rootScope.mainContentScrolled = function() {
-            $rootScope.$broadcast('mainContentScrolled');
-        };
-
+      // Flask responds with error, when DELETE method contains body, so we remove it
+      if (operation === 'remove') {
+        return undefined;
+      }
+      return element;
     });
+    Restangular.addResponseInterceptor(function(data) {
+      endLoading();
+      return data;
+    });
+
+    /**
+     * This interceptor extracts meta data from list response
+     * This meta data can be:
+     *      cursor - ndb Cursor used for pagination
+     *      totalCount - total count of items
+     *      more - whether datastore contains more items, in terms of pagination
+     */
+    Restangular.addResponseInterceptor(function(data, operation) {
+      var extractedData;
+      if (operation === 'getList') {
+        extractedData = data.list;
+        extractedData.meta = data.meta;
+      } else {
+        extractedData = data;
+      }
+      return extractedData;
+    });
+
+    /**
+     * If there are FlashMessages from server, toast will display them
+     */
+    if (!_.isEmpty(gaFlashMessages)) {
+      $timeout(function() {
+        gaToast.show(gaFlashMessages[0], {
+          delay: 10000
+        });
+      }, 1000);
+    }
+
+    $rootScope.$on('$stateChangeError', function() {
+      gaToast.show('Sorry, there was a error while loading that page.');
+    });
+
+    /**
+     * Fires off when content was scrolled to bottom. This is defined in base.html
+     */
+    $rootScope.mainContentScrolled = function() {
+      $rootScope.$broadcast('mainContentScrolled');
+    };
+
+  });
 
 }());
