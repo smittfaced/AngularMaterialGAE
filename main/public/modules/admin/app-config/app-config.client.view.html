@@ -1,7 +1,7 @@
 <form name="appConfigForm">
   <md-tabs md-dynamic-height md-selected="tabIndex">
     <md-tab label="General">
-      <md-content layout="column" layout-padding>
+      <md-content layout="column" layout-padding layout-margin>
         <md-input-container flex flex-order="1">
           <label>Brand name</label>
           <input ng-model="cfg.brand_name" tabindex="1" name="brand_name" required>
@@ -25,7 +25,7 @@
       </md-content>
     </md-tab>
     <md-tab label="Authentications">
-      <md-content layout="column" layout-padding md-swipe-left="next()" md-swipe-right="previous()">
+      <md-content layout="column" layout-padding layout-margin md-swipe-left="next()" md-swipe-right="previous()">
         <md-input-container ng-repeat="(authKey, auth) in getAuthOptions()">
           <label>
                         <i class="fa fa-{{ getAuthName(authKey) }}"></i>
@@ -36,7 +36,7 @@
       </md-content>
     </md-tab>
     <md-tab label="Security">
-      <md-content layout="column" layout-padding md-swipe-left="next()" md-swipe-right="previous()">
+      <md-content layout="column" layout-padding layout-margin md-swipe-left="next()" md-swipe-right="previous()">
         <md-input-container>
           <label>Flask Secret Key</label>
           <input ng-model="cfg.flask_secret_key" tabindex="1" name="flask_secret_key">
@@ -53,16 +53,18 @@
       </md-content>
     </md-tab>
     <md-tab label="Tracking">
-      <md-content layout="column" layout-padding md-swipe-left="next()" md-swipe-right="previous()">
+      <md-content layout="column" layout-padding layout-margin md-swipe-left="next()" md-swipe-right="previous()">
         <md-input-container>
           <label>Google Analytics Tracking ID</label>
           <input ng-model="cfg.analytics_id" tabindex="1" name="analytics_id">
         </md-input-container>
-        Get it from <a target="_blank" href="https://www.google.com/analytics/web/">Google Analytics</a>
+        <div>
+          Get it from <a target="_blank" href="https://www.google.com/analytics/web/">Google Analytics</a>
+        </div>
       </md-content>
     </md-tab>
     <md-tab label="reCAPTCHA">
-      <md-content layout="column" layout-padding md-swipe-left="next()" md-swipe-right="previous()">
+      <md-content layout="column" layout-padding layout-margin md-swipe-left="next()" md-swipe-right="previous()">
         <md-input-container>
           <label>Public Key</label>
           <input ng-model="cfg.recaptcha_public_key" tabindex="1" name="analytics_id">
