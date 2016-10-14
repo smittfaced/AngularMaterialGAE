@@ -11,6 +11,7 @@
     "lodash": "4.14.1",
     "angular-messages": "1.5.0",
     "angular-material": "1.1.1",
+    "material-design-icons": "latest",
     "angular-aria": "1.5.0",
     "angular-no-captcha": "0.6.0",
     "lrInfiniteScroll": "1.0.1",
