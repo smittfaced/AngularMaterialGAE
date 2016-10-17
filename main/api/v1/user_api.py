@@ -28,7 +28,7 @@ class UsersAPI(Resource):
 
         users_future = User.query() \
             .order(-User.created) \
-            .fetch_page_async(10, start_cursor=args.cursor)
+            .fetch_page_async(15, start_cursor=args.cursor)
 
         total_count_future = User.query().count_async(keys_only=True)
         users, next_cursor, more = users_future.get_result()
@@ -89,5 +89,3 @@ class UserPasswordAPI(Resource):
         g.model_db.password_hash = util.password_hash(args.new_password)
         g.model_db.put()
         return make_empty_ok_response()
-
-
