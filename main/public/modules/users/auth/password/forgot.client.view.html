@@ -18,9 +18,12 @@
             </div>
           </md-input-container>
           <div class="mar-top-20" layout="column" layout-gt-sm="row" layout-margin>
-            <md-button flex ui-sref="signin">I think I know it!</md-button>
-            <md-button flex class="md-raised md-primary" type="submit" ng-disabled="!forgotForm.$valid || isLoading" ng-click="askForNewPassword()">
-              <i class="fa fa-send-o btn-icon"></i> Send
+            <md-button flex flex-order="2" ui-sref="signin">
+              I think I know it!
+            </md-button>
+            <md-button flex flex-order="2" class="md-raised md-primary" type="submit" ng-disabled="!forgotForm.$valid || isLoading" ng-click="askForNewPassword()">
+              Send
+              <md-icon md-svg-icon="content:ic_send_24px"></md-icon>
             </md-button>
           </div>
         </div>

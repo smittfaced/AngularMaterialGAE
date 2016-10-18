@@ -119,7 +119,7 @@
       }, 1000);
     }
 
-    $rootScope.$on('$stateChangeError', function() {
+    $transitions.onError({}, function() {
       gaToast.show('Sorry, there was a error while loading that page.');
     });
 

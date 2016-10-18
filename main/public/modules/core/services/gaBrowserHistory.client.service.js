@@ -21,41 +21,19 @@
         history = [];
         /*jslint unparam:true*/
 
-        $transitions.onBefore({
-          exiting: '**'
-        }, function(state) {
+        $transitions.onBefore({}, state => {
 
-          if (state.abstract || _.includes(ignoredStates, state.from().name)) {
+          if (state.to().abstract || _.includes(ignoredStates, state.from().name)) {
             return;
+          } else {
+            history.push({
+              state: state.from(),
+              params: state.params()
+            })
           };
-
-          console.log($state.transition);
-
-          history.push({
-            state: state.from().name,
-            params: $state.params
-          });
-
-          //if ($state.abstract || _.includes(ignoredStates, fromState.name)) {
-          //    return;
-          //}
-          //history.push({
-          //    state: fromState,
-          //    params: fromParams
-          //});
         });
-        console.log($transitions.getHooks("onStart"));
-
-        //$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-        //    if (fromState.abstract || _.includes(ignoredStates, fromState.name)) {
-        //        return;
-        //    }
-        //    history.push({
-        //        state: fromState,
-        //        params: fromParams
-        //    });
-        //});
       },
+
       /**
        * Navigates back to previous state
        * If user is logged and his previous state was signin page, it won't redirect there
@@ -68,6 +46,7 @@
           $state.go(state.state, state.params);
         }
       }
+
     };
 
   });
