@@ -21,7 +21,7 @@
         history = [];
         /*jslint unparam:true*/
 
-        $transitions.onBefore({}, state => {
+        $transitions.onBefore({}, function(state) {
 
           if (state.to().abstract || _.includes(ignoredStates, state.from().name)) {
             return;

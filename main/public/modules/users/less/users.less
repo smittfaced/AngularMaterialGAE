@@ -4,19 +4,20 @@
 
 .user-list-item {
   .profile-pic {
-    width: 45px
+    width: 45px;
   }
-  &.ng-move,
+
   &.ng-enter,
-  &.ng-leave {
+  &.ng-leave,
+  &.ng-move {
     .swift-out(0.8s);
     position: relative;
     display: block;
   }
 
+  &.ng-enter,
   &.ng-leave.ng-leave-active,
-  &.ng-move,
-  &.ng-enter {
+  &.ng-move {
     opacity: 0;
     right: -75px;
   }
@@ -28,19 +29,22 @@
     transition-duration: 0s;
   }
 
+  &.ng-enter.ng-enter-active,
   &.ng-leave,
-  &.ng-move.ng-move-active,
-  &.ng-enter.ng-enter-active {
+  &.ng-move.ng-move-active {
     opacity: 1;
     right: 0;
   }
 }
 
-.profile-view {  &.ng-enter, &.ng-leave {
+.profile-view {
+  &.ng-enter,
+  &.ng-leave {
     .swift-out;
   }
 
-  &.ng-enter, &.ng-leave-active {
+  &.ng-enter,
+  &.ng-leave-active {
     opacity: 0;
   }
 

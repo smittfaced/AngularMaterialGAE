@@ -9,59 +9,68 @@
     </div>
   </md-toolbar>
   <md-content class="sidenav-content" layout="column" layout-align="center">
-    <md-button ng-if="auth.isAdmin()" ui-sref="admin.appConfig">
+    <md-button class="md-cornered" ng-if="auth.isAdmin()" ui-sref="admin.appConfig">
       <div flex flex-order="1">
         <md-icon md-svg-icon="action:ic_settings_applications_24px"></md-icon>
         App Config
       </div>
     </md-button>
-    <md-button ng-show="auth.isLogged()" ui-sref="profile.view({username: auth.user.username})">
-      <div flex flex-order="2">
-        <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-        My Profile
-      </div>
-    </md-button>
-    <md-button ng-hide="auth.isLogged()" ui-sref="signin" class="md-primary">
-      <div flex flex-order="3">
-        <md-icon md-svg-icon="action:ic_input_24px"></md-icon>
-        Sign In
-      </div>
-    </md-button>
-    <md-button ng-hide="auth.isLogged()" ui-sref="signup">
-      <div flex flex-order="4">
-        <md-icon md-svg-icon="social:ic_person_add_24px"></md-icon>
-        Sign Up
-      </div>
-    </md-button>
-    <md-button ui-sref="users">
-      <div flex flex-order="5">
-        <md-icon md-svg-icon="social:ic_group_24px"></md-icon>
-        Users
-      </div>
-    </md-button>
-    <md-button ng-show="cfg.has_feedback_form" ui-sref="feedback">
-      <div flex flex-order="6">
-        <md-icon md-svg-icon="action:ic_feedback_24px"></md-icon>
-        Feedback
-      </div>
-    </md-button>
-    <md-button ng-show="cfg.development" ng-hide="true" ng-click="generateDatabase()">
+    <md-divider ng-if="auth.isAdmin()"></md-divider>
+    <md-button class="md-cornered" ng-show="cfg.development" ng-hide="true" ng-click="generateDatabase()">
       <div flex flex-order="7">
         <md-icon md-svg-icon="device:ic_storage_24px"></md-icon>
         Generate Database
       </div>
     </md-button>
-    <md-button ng-show="auth.isLogged()" ui-sref="signout" class="md-warn">
+    <md-divider ng-show="cfg.development" ng-hide="true"></md-divider>
+    <md-button class="md-cornered" ng-show="auth.isLogged()" ui-sref="profile.view({username: auth.user.username})">
+      <div flex flex-order="2">
+        <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
+        My Profile
+      </div>
+    </md-button>
+    <md-divider ng-show="auth.isLogged()"></md-divider>
+    <md-button class="md-cornered md-primary" ng-hide="auth.isLogged()" ui-sref="signin">
+      <div flex flex-order="3">
+        <md-icon md-svg-icon="action:ic_input_24px"></md-icon>
+        Sign In
+      </div>
+    </md-button>
+    <md-divider ng-hide="auth.isLogged()"></md-divider>
+    <md-button class="md-cornered" ng-hide="auth.isLogged()" ui-sref="signup">
+      <div flex flex-order="4">
+        <md-icon md-svg-icon="social:ic_person_add_24px"></md-icon>
+        Sign Up
+      </div>
+    </md-button>
+    <md-divider ng-hide="auth.isLogged()"></md-divider>
+    <md-button class="md-cornered" ui-sref="users">
+      <div flex flex-order="5">
+        <md-icon md-svg-icon="social:ic_group_24px"></md-icon>
+        Users
+      </div>
+    </md-button>
+    <md-divider></md-divider>
+    <md-button class="md-cornered" ng-show="cfg.has_feedback_form" ui-sref="feedback">
+      <div flex flex-order="6">
+        <md-icon md-svg-icon="action:ic_feedback_24px"></md-icon>
+        Feedback
+      </div>
+    </md-button>
+    <md-divider ng-show="cfg.has_feedback_form"></md-divider>
+    <md-button class="md-cornered md-warn" ng-show="auth.isLogged()" ui-sref="signout">
       <div flex flex-order="8">
         <md-icon md-svg-icon="action:ic_exit_to_app_24px"></md-icon>
         Sign Out
       </div>
     </md-button>
-    <md-button hide-gt-md ng-click="closeSidenav()" class="md-primary">
+    <md-divider ng-show="auth.isLogged()"></md-divider>
+    <md-button class="md-cornered md-primary" hide-gt-md ng-click="closeSidenav()">
       <div flex flex-order="9">
         <md-icon md-svg-icon="navigation:ic_close_24px"></md-icon>
         Close
       </div>
     </md-button>
+    <md-divider hide-gt-md></md-divider>
   </md-content>
 </div>

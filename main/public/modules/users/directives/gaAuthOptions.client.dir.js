@@ -13,7 +13,7 @@
 
     module.directive('gaAuthOptions', function(gaAppConfig) {
         var link = function(scope) {
-            scope.authOptions = _.keys(_.pick(gaAppConfig, function(cfg, cfgName) {
+            scope.authOptions = _.keys(_.pickBy(gaAppConfig, function(cfg, cfgName) {
                 return _.startsWith(cfgName, 'auth_') && cfg;
             }));
             scope.authOptions = _.map(scope.authOptions, function(optName) {
