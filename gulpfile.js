@@ -52,7 +52,8 @@
             'lib/lodash/lodash.js',
             'lib/lrInfiniteScroll/lrInfiniteScroll.js',
             'lib/angulartics/src/angulartics.js',
-            'lib/angulartics/src/angulartics-ga.js'
+            'lib/angulartics/src/angulartics-ga.js',
+            'lib/angulartics/src/angulartics-ga-cordova-google-analytics-plugin.js'
         ],
         scripts : [
             'application.js',
